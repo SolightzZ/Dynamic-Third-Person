@@ -1,0 +1,49 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.third_person.body": {
+			"animation_length": 0.25,
+			"blend_weight": "!query.is_in_ui || !variable.is_first_person",
+			"bones": {
+				"root": {
+					"rotation": [0, "-query.body_y_rotation+math.atan2(query.position_delta(0), -query.position_delta(2)) - 180", 0]
+				},
+				"head": {
+					"rotation": [0, "-query.body_y_rotation+math.atan2(query.position_delta(0), -query.position_delta(2)) - 180", 0]
+				}
+			}
+		},
+		"animation.third_person.body2": {
+			"loop": "hold_on_last_frame",
+			"animation_length": 1,
+			"override_previous_animation": true,
+			"blend_weight": "!variable.is_first_person",
+			"bones": {
+				"root": {
+					"rotation": {
+						"0.0": [0, "query.target_y_rotation", 0],
+						"1.0": [0, "query.target_y_rotation", 0]
+					}
+				},
+				"head": {
+					"rotation": {
+						"0.0": [0, "query.target_y_rotation", 0],
+						"1.0": [0, "query.target_y_rotation", 0]
+					}
+				}
+			}
+		},
+		"animation.third_person.default": {
+			"animation_length": 1,
+			"blend_weight": "!variable.is_first_person",
+			"bones": {
+				"root": {
+					"rotation": [0, 0, 0]
+				},
+				"head": {
+					"rotation": [0, 0, 0]
+				}
+			}
+		}
+	}
+}

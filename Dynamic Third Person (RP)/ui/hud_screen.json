@@ -1,0 +1,171 @@
+{
+  "namespace": "hud",
+  
+	"crosshair_render": {
+		"$update_string": "crosshair_update",
+		"type": "image",
+		"texture": "#texture",
+		"anchor_from": "center",
+		"anchor_to": "center",
+		"size": [ 16, 16 ],
+		"layer": 1,
+		"alpha": 1,
+		"controls": [
+			{
+				"data_control_crosshair": {
+					"type": "panel",
+					"size": [ 0, 0 ],
+					"bindings": [
+						{
+							"binding_name": "#hud_title_text_string"
+						},
+						{
+							"binding_name": "#hud_title_text_string",
+							"binding_name_override": "#preserved_text",
+							"binding_condition": "visibility_changed"
+						},
+						{
+							"binding_type": "view",
+							"source_property_name": "(not (#hud_title_text_string = #preserved_text) and not ((#hud_title_text_string - $update_string) = #hud_title_text_string))",
+							"target_property_name": "#visible"
+						}
+					]
+				}
+			}
+		],
+		"bindings": [
+			{
+				"binding_type": "view",
+				"source_control_name": "data_control_crosshair",
+				"source_property_name": "(#preserved_text - $update_string)",
+				"target_property_name": "#texture"
+			}
+		]
+	},
+
+	"tip_template": {
+		"$texture|default": "textures/ui/Black",
+		"$text|default": "text",
+		"type": "panel",
+		"size": [ "100%c", 20 ],
+		"controls": [
+			{
+				"image": {
+					"type": "image",
+					"size": [ 16, 16 ],
+					"texture": "$texture",
+					"anchor_from": "left_middle",
+					"anchor_to": "left_middle"
+				}
+			},
+			{
+				"text": {
+					"type": "image",
+					"texture": "textures/ui/Black",
+					"anchor_from": "left_middle",
+					"anchor_to": "left_middle",
+					"offset": [ 20, 0 ],
+					"alpha": 0.7,
+					"size": [ "100%c+4px", "100%c" ],
+					"controls": [
+						{
+							"chat_text": {
+								"type": "label",
+								"text": "$text",
+								"anchor_from": "top_left",
+								"anchor_to": "top_left",
+								"offset": [ 2, 0 ]
+							}
+						}
+					]
+				}
+			}
+		]
+	},
+	"camera_tooltip_render": {
+		"type": "stack_panel",
+		"alpha": 1,
+		"controls": [
+			{
+				"text_0@hud.tip_template": {
+					"$texture": "textures/gui/forward_button",
+					"$text": "Move forward"
+				}
+			},
+			{
+				"text_1@hud.tip_template": {
+					"$texture": "textures/gui/backward_button",
+					"$text": "Move backward"
+				}
+			},
+			{
+				"text_2@hud.tip_template": {
+					"$texture": "textures/gui/right_button",
+					"$text": "Lift up"
+				}
+			},
+			{
+				"text_3@hud.tip_template": {
+					"$texture": "textures/gui/left_button",
+					"$text": "Lift down"
+				}
+			},
+			{
+				"text_4@hud.tip_template": {
+					"$texture": "textures/gui/sneak_button",
+					"$text": "Exit camera mode"
+				}
+			}
+		]
+	},
+	"root_panel": {
+		"modifications": [
+			{
+				"array_name": "controls",
+				"operation": "insert_front",
+				"value": [
+					{
+						"data_control_camera_tooltip": {
+							"$update_string": "camera_tooltip_update",
+							"type": "panel",
+							"size": [ 0, 0 ],
+							"bindings": [
+								{
+									"binding_name": "#hud_title_text_string"
+								},
+								{
+									"binding_name": "#hud_title_text_string",
+									"binding_name_override": "#preserved_text",
+									"binding_condition": "visibility_changed"
+								},
+								{
+									"binding_type": "view",
+									"source_property_name": "(not (#hud_title_text_string = #preserved_text) and not ((#hud_title_text_string - $update_string) = #hud_title_text_string))",
+									"target_property_name": "#visible"
+								}
+							]
+						}
+					},
+					{
+						"crosshair_render@hud.crosshair_render": {}
+					},
+					{
+						"camera_tooltip_render@hud.camera_tooltip_render": {
+							"anchor_from": "bottom_left",
+							"anchor_to": "bottom_left",
+							"$update_string": "camera_tooltip_update",
+							"bindings": [
+								{
+									"binding_type": "view",
+									"source_control_name": "data_control_camera_tooltip",
+									"source_property_name": "( (#preserved_text - $update_string) = 'show_tooltip')",
+									"target_property_name": "#visible"
+								}
+							]
+						}
+					}
+				]
+			}
+		]
+	}
+}

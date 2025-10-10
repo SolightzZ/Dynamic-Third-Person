@@ -1,0 +1,26 @@
+{
+  "format_version": 2,
+  "header": {
+    "description": "Who made this pack?",
+    "name": "[Solight] Dynamic Third Person Camera",
+    "uuid": "37957427-5b81-4aeb-8d76-185229a88c88",
+    "version": [1, 2, 0],
+    "min_engine_version": [1, 20, 50]
+  },
+  "modules": [
+    {
+      "description": "",
+      "type": "script",
+      "language": "javascript",
+      "uuid": "4b3e6b61-a401-46bb-a585-83af72833627",
+      "version": [1, 2, 0],
+      "entry": "scripts/main.js"
+    }
+  ],
+  "dependencies": [
+    {
+      "module_name": "@minecraft/server",
+      "version": "1.7.0"
+    }
+  ]
+}
